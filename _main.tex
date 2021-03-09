@@ -1,0 +1,93 @@
+\documentclass[fleqn,10pt]{wlscirep}
+\usepackage{url,hyperref,lineno,microtype,subcaption}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{xspace}
+\usepackage{outlines}
+\usepackage{siunitx}
+% \usepackage{titlesec}
+
+\newcommand{\unit}[1]{\ensuremath{\text{\,#1}}\xspace}
+\newcommand{\hlsfml}{\texttt{hls4ml}\xspace}
+\newcommand{\conifer}{\texttt{Conifer}\xspace}
+\newcommand{\norm}[1]{\|#1\|}
+\renewcommand{\vec}[1]{\boldsymbol{#1}}
+\newcommand{\TODO}[1]{\textcolor{red}{[TODO: #1]}}
+
+% Changing default section sizes
+\makeatletter
+\renewcommand\section{\@startsection {section}{1}{\z@}%
+                                   {-3.5ex \@plus -1ex \@minus -.2ex}%
+                                   {2.3ex \@plus.2ex}%
+                                   {\Huge\bf}}% from \Large
+\renewcommand\subsection{\@startsection{subsection}{2}{\z@}%
+                                     {-3.25ex\@plus -1ex \@minus -.2ex}%
+                                     {1.5ex \@plus .2ex}%
+                                     {\Large\bfseries}}% from \large                
+\renewcommand\subsubsection{\@startsection{subsubsection}{3}{\z@}%
+                                     {-3.25ex\@plus -1ex \@minus -.2ex}%
+                                     {1.5ex \@plus .2ex}%
+                                     {\large\bfseries}}% from \normalsize
+                                     
+\begin{document}
+
+\title{Applications and Techniques for Fast Machine Learning in Science}
+
+\author[1]{Jane Doe}
+\author[2]{John Doe}
+
+\affil[1]{Hogwarts}
+\affil[2]{Starfleet Academy}
+
+\begin{abstract}
+This white paper is for ...
+\end{abstract}
+\maketitle
+
+\pagebreak
+\vspace{5cm}
+\tableofcontents
+\clearpage
+
+\section*{Executive Summary}
+\textcolor{blue}{tl;dr version}
+
+\pagebreak
+\section{Introduction}
+\textcolor{red}{Section Editors: ...}
+\input{_s1_introduction}
+\noindent Goals and content of this white paper
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\pagebreak
+\section{Application domains}
+\label{sec:apps}
+\textcolor{red}{Section Editors: ...}
+
+\input{_s2_applications}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\pagebreak
+\section{Key areas of overlap}
+\textcolor{red}{Section Editors: Mia Liu (Purdue),...}
+\input{_s3_overlaps}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\pagebreak
+\section{Technology SOTA}
+\label{sec:technolog_sota}
+\textcolor{red}{Section Editors: ...}
+\input{_s4_technology}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{Acknowledgments}
+We acknowledge the Fast Machine Learning collective as an open community of multi-domain experts and collaborators. 
+This community was important for the development of this project. 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\clearpage
+%\bibliographystyle{JHEP} 
+\bibliography{references,references-amir}
+
+\end{document}

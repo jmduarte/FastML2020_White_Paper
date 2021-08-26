@@ -2,7 +2,11 @@
 % \textcolor{blue}{
 % The content of this section will be dependent on the interests of contributors and what they want to write about.
 % }
-In this section, we aim to give an overview of technologies and techniques for building fast ML algorithms. This requires {\it codesign}: building algorithms with hardware in mind and providing efficient platforms for programming the hardware.  Section~\ref{sec:deploy} and Section~\ref{sec:train} focus on neural network design and training for efficient implementation in hardware. In Section~\ref{sec:cmos} and Section~\ref{sec:beyondcmos}, we classify our discussion of ML hardware compute platforms into two categories: "Conventional CMOS Hardware" and "Emerging Beyond CMOS Hardware".  The former will address nearer-term hardware solutions, while the latter will focus on the speculative end of the spectrum. Meanwhile, because the area of programming new hardware is rapidly moving, we lay out an example of the options and challenges for one device family: FPGAs. This is presented in Sec.~\ref{sec:codesign}, and from the details for FPGAs we hope the reader also gets a sense of the fundamental approaches for designing software for emerging hardware.   
+In this section, we aim to give an overview of technologies and techniques for building fast ML algorithms. 
+This requires {\it codesign}: building algorithms with hardware in mind and providing efficient platforms for programming the hardware.  Section~\ref{sec:deploy} and Section~\ref{sec:train} focus on neural network design and training for efficient implementation in hardware. 
+In Section~\ref{sec:cmos} and Section~\ref{sec:beyondcmos}, we classify our discussion of ML hardware compute platforms into two categories: ``Conventional CMOS Hardware'' and ``Emerging Beyond CMOS Hardware.''  
+The former will address nearer-term hardware solutions, while the latter will focus on the speculative end of the spectrum. Meanwhile, because the area of programming new hardware is rapidly moving, we lay out an example of the options and challenges for one device family: FPGAs. 
+This is presented in Sec.~\ref{sec:codesign}, and from the details for FPGAs we hope the reader also gets a sense of the fundamental approaches for designing software for emerging hardware.   
 
 
 \subsection{Systematic Methods for the Efficient Deployment of ML Models}
@@ -51,21 +55,15 @@ squeeze-and-excite modules~\cite{hu2018squeeze},
 and inverted residual blocks~\cite{sandler2018mobilenetv2}.
 
 These classical techniques mostly found new architecture modules
-through a manual design search. This is not scalable, and as such
-recent approaches have proposed automated methods that use
- Neural Architecture Search (NAS). NAS methods
-automatically find the right NN architecture for a given constraint
+through a manual design search. 
+This is not scalable, and as such recent approaches have proposed automated methods that use neural architecture search (NAS). 
+NAS methods automatically find the right NN architecture for a given constraint
 of model size, depth/width, and/or latency.
 The high level approach here is to train a probabilistic \emph{SuperNet}
 that includes all possible combinations of NN architectures within the prescribed
-constraints, but with learnable probabilities. After this SuperNet is trained,
-one can sample an architecture from its learned probability distribution.
-Notable works include 
-RL based methods~\cite{zoph2016neural},
-Efficient NAS~\cite{pham2018efficient},
-MNasNet~\cite{tan2019mnasnet},
-DARTS~\cite{liu2018darts},
-and Differentiable NAS~\cite{wu2019fbnet}.
+constraints, but with learnable probabilities. 
+After this SuperNet is trained, one can sample an architecture from its learned probability distribution.
+Notable works include RL based methods~\cite{zoph2016neural}, efficient NAS~\cite{pham2018efficient}, MNasNet~\cite{tan2019mnasnet}, DARTS~\cite{liu2018darts}, and Differentiable NAS~\cite{wu2019fbnet}.
 
 % \begin{outline}
 %     \1 SqueezeNet ~\cite{iandola2016squeezenet};
@@ -106,7 +104,8 @@ and \emph{Quantization-Aware Training} (QAT). In PTQ, a pre-trained model in sin
 without any fine-tuning or re-training~\cite{banner2018post,meller2019same,choukroun2019low,zhao2019improving,fang2020post,fang2020near,lee2018quantization,nagel2019data,cai2020zeroq,hawks2021ps}. As such, these quantization methods are typically very fast, and, in some cases, do not even require any training data~\cite{cai2020zeroq, haroush2020knowledge,nagel2019data}.
 However, PTQ often leads to high accuracy degradation especially for low precision quantization.
 To address this, some quantization methods adopt QAT to re-train the model after the quantization, so that the parameters can
-get adjusted. This approach often results in higher accuracy, but at the cost of longer
+get adjusted. 
+This approach often results in higher accuracy, but at the cost of longer
 time associated with re-training the model~\cite{courbariaux2015binaryconnect,lin2015neural,hubara2016binarized,rastegari2016xnor,zhou2016dorefa,zhu2016trained,cai2017deep,hou2016loss,gysel2018ristretto,huang2021codenet,zhou2018explicit}.
 
 Another differentiator is the use of \emph{simulated quantization} (aka fake quantization), versus \emph{integer-only} quantization~\cite{jacob2018quantization,yao2020hawqv3,kim2021bert,lin2016fixed}. In the former, 

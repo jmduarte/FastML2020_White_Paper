@@ -1,10 +1,46 @@
-\documentclass[fleqn,10pt]{wlscirep}
-\usepackage{url,hyperref,lineno,microtype,subcaption}
-\usepackage{amsmath}
+\documentclass[utf8]{frontiersFPHY}
+\pdfoutput=1
+
+% % \documentclass[fleqn,10pt]{wlscirep}
+% \usepackage{url,hyperref,lineno,microtype,subcaption}
+% \usepackage{amsmath}
+% \usepackage{graphicx}
+% \usepackage{xspace}
+% \usepackage{outlines}
+% \usepackage{siunitx}
+% \usepackage{tikz}
+% \usepackage{pifont}% http://ctan.org/pkg/pifont
+% \usepackage{amssymb}
+% % \usepackage[utf8]{inputenc}
+
+\setcitestyle{square} 
+\usepackage{hyperref}       % hyperlinks
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=blue,
+}
+\usepackage{url}            
+\usepackage{booktabs}       
+\usepackage{amsmath}       
+\usepackage{nicefrac} 
+\usepackage{microtype} 
+\usepackage{lipsum}
 \usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{multirow}
 \usepackage{xspace}
-\usepackage{outlines}
-\usepackage{siunitx}
+% \usepackage[onehalfspacing]{setspace}
+\usepackage{setspace}
+\usepackage{glossaries-prefix}
+\usepackage[capitalise,noabbrev]{cleveref}
+\usepackage{todonotes}
+\usepackage{float}
+\usepackage[toc,page]{appendix}
+\usepackage{todonotes}
+\usepackage{tcolorbox}
+
 % \usepackage{titlesec}
 
 \newcommand{\unit}[1]{\ensuremath{\text{\,#1}}\xspace}
@@ -15,69 +51,125 @@
 \newcommand{\TODO}[1]{\textcolor{red}{[TODO: #1]}}
 
 % Changing default section sizes
-\makeatletter
-\renewcommand\section{\@startsection {section}{1}{\z@}%
-                                   {-3.5ex \@plus -1ex \@minus -.2ex}%
-                                   {2.3ex \@plus.2ex}%
-                                   {\Huge\bf}}% from \Large
-\renewcommand\subsection{\@startsection{subsection}{2}{\z@}%
-                                     {-3.25ex\@plus -1ex \@minus -.2ex}%
-                                     {1.5ex \@plus .2ex}%
-                                     {\Large\bfseries}}% from \large                
-\renewcommand\subsubsection{\@startsection{subsubsection}{3}{\z@}%
-                                     {-3.25ex\@plus -1ex \@minus -.2ex}%
-                                     {1.5ex \@plus .2ex}%
-                                     {\large\bfseries}}% from \normalsize
+% \makeatletter
+% \renewcommand\section{\@startsection {section}{1}{\z@}%
+%                                   {-3.5ex \@plus -1ex \@minus -.2ex}%
+%                                   {2.3ex \@plus.2ex}%
+%                                   {\Huge\bf}}% from \Large
+% \renewcommand\subsection{\@startsection{subsection}{2}{\z@}%
+%                                      {-3.25ex\@plus -1ex \@minus -.2ex}%
+%                                      {1.5ex \@plus .2ex}%
+%                                      {\Large\bfseries}}% from \large                
+% \renewcommand\subsubsection{\@startsection{subsubsection}{3}{\z@}%
+%                                      {-3.25ex\@plus -1ex \@minus -.2ex}%
+%                                      {1.5ex \@plus .2ex}%
+%                                      {\large\bfseries}}% from \normalsize
                                      
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \input{_frontmatter}
+\def\keyFont{\fontsize{8}{11}\helveticabold }
+%\def\firstAuthorLast{McCarn Deiana, Tran, {et~al.}} 
+
+%\def\Authors{
+%Editors: Allison McCarn Deiana\,$^{1}$, Nhan %Tran\,$^{2,3}$\\
+%Section Editors:
+%Joshua Agar\,$^{4}$,
+%Michaela Blott\,$^{5}$
+%Giuseppe Di Guglielmo,
+%Javier Duarte,
+%hillip Harris,
+%Scott Hauck, 
+%Mia Liu,
+%Mark Neubauer, 
+%Jennifer Ngadiuba,
+%Seda Ogrenci-Memik,
+%Maurizio Pierini \\
+%Section Contributors:
+%}
+
+
+%\def\Address{
+%$^{1}$Southern Methodist University,XXX, YY ZZZZ, %AAA\\
+%$^{2}$Fermi National Accelerator Laboratory, Batavia, %IL 60510, USA\\
+%$^{3}$Northwestern University, Evanston, IL 60208, USA\\
+%$^{4}$Lehigh University, University,XXX, YY ZZZZ, AAA\\
+%$^{5}$Xilinx Research, Dublin, D24 T683, Ireland\\
+%$^{6}$ CERN\\
+%$^{7}$ Princeton University\\
+%$^{8}$ University of Florida\\
+%}
+
+%\def\corrAuthor{Nhan Tran}
+%\def\corrEmail{ntran@fnal.gov}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{document}
 
-\title{Applications and Techniques for Fast Machine Learning in Science}
+\title[Fast Machine Learning in Science]{Applications and Techniques for Fast Machine Learning in Science}
+\input{_frontmatter}
+\onecolumn
+% \firstpage{1}
 
-\author[1]{Jane Doe}
-\author[2]{John Doe}
+\author[\firstAuthorLast ]{\Authors} %This field will be automatically populated
+\address{} %This field will be automatically populated
+\correspondance{} %This field will be automatically populated
 
-\affil[1]{Hogwarts}
-\affil[2]{Starfleet Academy}
+\extraAuth{}% If there are more than 1 corresponding author, comment this line and uncomment the next one.
 
-\begin{abstract}
-This white paper is for ...
-\end{abstract}
 \maketitle
 
-\pagebreak
-\vspace{5cm}
-\tableofcontents
 \clearpage
+% \tableofcontents
+\begin{spacing}{1.3}
+\makeatletter
+  \null\hfill\textbf{\Large\contentsname}\hfill\null\par
+  \@mkboth{\MakeUppercase\contentsname}{\MakeUppercase\contentsname}%
+%   \setcounter{tocdepth}{4}
+%   \setcounter{secnumdepth}{4}
+%   \let\l@paragraph\l@subsubsection
+  \@starttoc{toc}
+\makeatother
+\end{spacing}
+% \large
+% \textcolor{red}{TO DO: ADD A TABLE OF CONTENTS}
+% \normalsize
+% \tableofcontents
 
-\section*{Executive Summary}
-\textcolor{blue}{tl;dr version}
+\clearpage
+\begin{spacing}{1.3}
+\section*{Foreward}
+% \textcolor{blue}{tl;dr version}
+\input{_s0_executivesummary}
 
 \pagebreak
 \section{Introduction}
-\textcolor{red}{Section Editors: ...}
+% \textcolor{red}{Section Editors: ...}
 \input{_s1_introduction}
-\noindent Goals and content of this white paper
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \pagebreak
-\section{Application domains}
+\section{Examplars of domain applications}
 \label{sec:apps}
-\textcolor{red}{Section Editors: ...}
+%\textcolor{red}{Section Editors: ...}
 
 \input{_s2_applications}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \pagebreak
 \section{Key areas of overlap}
-\textcolor{red}{Section Editors: Mia Liu (Purdue),...}
+\label{sec:overlaps}
+% \textcolor{red}{Section Editors: Mia Liu (Purdue),...}
 \input{_s3_overlaps}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \pagebreak
-\section{Technology SOTA}
+% \addtocontents{toc}{\setcounter{tocdepth}{5}}
+\addtocontents{toc}{\protect\setcounter{tocdepth}{5}}
+\section{Technology State-of-the-Art}
 \label{sec:technolog_sota}
-\textcolor{red}{Section Editors: ...}
 \input{_s4_technology}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section*{Acknowledgments}
@@ -86,8 +178,11 @@ This community was important for the development of this project.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \clearpage
-%\bibliographystyle{JHEP} 
-\bibliography{references,references-amir}
+\bibliographystyle{frontiersFPHY} %needed for correct ordering
+\bibliography{references,references-amir,references-dmitri,references-guo}
+
+\end{spacing}
 
 \end{document}

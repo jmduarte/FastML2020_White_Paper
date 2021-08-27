@@ -1,18 +1,5 @@
 \documentclass[utf8]{frontiersFPHY}
 \pdfoutput=1
-
-% % \documentclass[fleqn,10pt]{wlscirep}
-% \usepackage{url,hyperref,lineno,microtype,subcaption}
-% \usepackage{amsmath}
-% \usepackage{graphicx}
-% \usepackage{xspace}
-% \usepackage{outlines}
-% \usepackage{siunitx}
-% \usepackage{tikz}
-% \usepackage{pifont}% http://ctan.org/pkg/pifont
-% \usepackage{amssymb}
-% % \usepackage[utf8]{inputenc}
-
 \setcitestyle{square} 
 \usepackage{hyperref}       % hyperlinks
 \hypersetup{
@@ -38,10 +25,7 @@
 \usepackage{todonotes}
 \usepackage{float}
 \usepackage[toc,page]{appendix}
-\usepackage{todonotes}
 \usepackage{tcolorbox}
-
-% \usepackage{titlesec}
 
 \newcommand{\unit}[1]{\ensuremath{\text{\,#1}}\xspace}
 \newcommand{\hlsfml}{\texttt{hls4ml}\xspace}
@@ -50,60 +34,7 @@
 \renewcommand{\vec}[1]{\boldsymbol{#1}}
 \newcommand{\TODO}[1]{\textcolor{red}{[TODO: #1]}}
 
-% Changing default section sizes
-% \makeatletter
-% \renewcommand\section{\@startsection {section}{1}{\z@}%
-%                                   {-3.5ex \@plus -1ex \@minus -.2ex}%
-%                                   {2.3ex \@plus.2ex}%
-%                                   {\Huge\bf}}% from \Large
-% \renewcommand\subsection{\@startsection{subsection}{2}{\z@}%
-%                                      {-3.25ex\@plus -1ex \@minus -.2ex}%
-%                                      {1.5ex \@plus .2ex}%
-%                                      {\Large\bfseries}}% from \large                
-% \renewcommand\subsubsection{\@startsection{subsubsection}{3}{\z@}%
-%                                      {-3.25ex\@plus -1ex \@minus -.2ex}%
-%                                      {1.5ex \@plus .2ex}%
-%                                      {\large\bfseries}}% from \normalsize
-                                     
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% \input{_frontmatter}
 \def\keyFont{\fontsize{8}{11}\helveticabold }
-%\def\firstAuthorLast{McCarn Deiana, Tran, {et~al.}} 
-
-%\def\Authors{
-%Editors: Allison McCarn Deiana\,$^{1}$, Nhan %Tran\,$^{2,3}$\\
-%Section Editors:
-%Joshua Agar\,$^{4}$,
-%Michaela Blott\,$^{5}$
-%Giuseppe Di Guglielmo,
-%Javier Duarte,
-%hillip Harris,
-%Scott Hauck, 
-%Mia Liu,
-%Mark Neubauer, 
-%Jennifer Ngadiuba,
-%Seda Ogrenci-Memik,
-%Maurizio Pierini \\
-%Section Contributors:
-%}
-
-
-%\def\Address{
-%$^{1}$Southern Methodist University,XXX, YY ZZZZ, %AAA\\
-%$^{2}$Fermi National Accelerator Laboratory, Batavia, %IL 60510, USA\\
-%$^{3}$Northwestern University, Evanston, IL 60208, USA\\
-%$^{4}$Lehigh University, University,XXX, YY ZZZZ, AAA\\
-%$^{5}$Xilinx Research, Dublin, D24 T683, Ireland\\
-%$^{6}$ CERN\\
-%$^{7}$ Princeton University\\
-%$^{8}$ University of Florida\\
-%}
-
-%\def\corrAuthor{Nhan Tran}
-%\def\corrEmail{ntran@fnal.gov}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{document}
 
 \title[Fast Machine Learning in Science]{Applications and Techniques for Fast Machine Learning in Science}
@@ -119,6 +50,14 @@
 
 \maketitle
 
+
+\begin{abstract}
+\section{}
+Abstract
+\tiny
+ \keyFont{ \section{Keywords:} fast machine learning} 
+\end{abstract}
+
 \clearpage
 % \tableofcontents
 \begin{spacing}{1.3}
@@ -131,12 +70,9 @@
   \@starttoc{toc}
 \makeatother
 \end{spacing}
-% \large
-% \textcolor{red}{TO DO: ADD A TABLE OF CONTENTS}
-% \normalsize
-% \tableofcontents
 
 \clearpage
+
 \begin{spacing}{1.3}
 \section*{Foreward}
 % \textcolor{blue}{tl;dr version}
@@ -152,7 +88,6 @@
 \section{Examplars of domain applications}
 \label{sec:apps}
 %\textcolor{red}{Section Editors: ...}
-
 \input{_s2_applications}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

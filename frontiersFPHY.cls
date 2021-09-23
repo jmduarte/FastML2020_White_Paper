@@ -497,11 +497,11 @@
     \vspace*{1sp}
     {\helveticabold\fontsize{20}{21}\color{black}\selectfont\raggedright \@title \par}%
     \vspace{4.5\p@}
-    {\helveticabold\fontsize{12}{15}\selectfont\raggedright \@author \par}%
+    {\helveticabold\fontsize{10}{10}\selectfont\raggedright \@author \par}%
         \vspace{4\p@}
-    {\helvetica\fontsize{12}{12}\selectfont\raggedright\slshape\@address \Address \\ \par}%
+    {\helvetica\fontsize{10}{10}\selectfont\raggedright\slshape\@address \Address \\ \par}%
       \vspace{6\p@}
-  {\helvetica\fontsize{12}{10}\selectfont\raggedright {Correspondence*:\\ }\@correspondance \corrAuthor \\ \corrEmail \par}
+  {\helvetica\fontsize{10}{10}\selectfont\raggedright {Correspondence*:\\ }\@correspondance \corrAuthor \\ \corrEmail \par}
         \vspace{4\p@}
     {\helvetica\fontsize{12}{12}\selectfont\raggedright\@extraAuth \par}%
     \vspace{8\p@}

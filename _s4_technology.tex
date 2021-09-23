@@ -188,8 +188,8 @@ better results than pruning or quantization alone.
 % --------------------------------------------------------------------------------
 
 \paragraph*{Knowledge distillation}
-\textcolor{red}{[S.H. This section is really confusing - needs more meat, and a better explanation] Model distillation~\cite{romero2014fitnets, hinton2015distilling, mishra2017apprentice, li2017learning, yim2017gift, polino2018model, ahn2019variational, yin2020dreaming} trains a large model and then uses it as a teacher to train a compact model. Instead of using class labels during the training of the student model, the key idea of model distillation is to leverage the soft probabilities produced by the teacher, 
-which can guide/help the student training. }
+Model distillation~\cite{romero2014fitnets, hinton2015distilling, mishra2017apprentice, li2017learning, yim2017gift, polino2018model, ahn2019variational, yin2020dreaming} trains a large model and then uses it as a teacher to train a compact model. Instead of using class labels during the training of the student model, the key idea of model distillation is to leverage the soft probabilities produced by the teacher, 
+which can guide/help the student training.
 % As an example in crystal structure recognition, for an input lattice with the label \textit{Fluorite structure}, classes such as \textit{Antifluorite structure} can also have high probabilities according to the teacher model. Teaching the compact student model to distinguish \textit{Antifluorite structure} (in addition to \textit{Fluorite structure}) from other irrelevant classes can lead to potential performance improvement.
 
 Previous methods of knowledge distillation focus on exploring different knowledge sources. Refs.~\cite{hinton2015distilling, li2017learning, park2019relational} use logits (the soft probabilities) as the source of knowledge, while Refs.~\cite{romero2014fitnets, yim2017gift, ahn2019variational} try to leverage the knowledge from intermediate layers. The choices of teacher models are also well studied, where Refs.~\cite{you2017learning, tarvainen2017mean} use multiple teacher models to jointly supervise the student model, while Refs.~\cite{crowley2018moonshine, zhang2019your} apply self-distillation without an extra teacher model. Other previous efforts apply knowledge distillation with different settings on different applications. Refs.~\cite{lopes2017data, nayak2019zero, yin2020dreaming} study data-free knowledge distillation, and Refs.~\cite{wang2018kdgan, wang2020minegan} combine knowledge distillation with GANs.
@@ -232,8 +232,13 @@ on this reward, the probability distribution of sampling architectures is update
 This process needs to be repeated for many different candidate architectures (sometimes exceeding
 hundreds of thousands). 
 Inherently, this leads to another problem related to tuning the optimization hyper-parameters
-for each candidate architecture, \textcolor{red}{[S.H. I don't understand this statement]which if not set properly could lead to divergent
-training for a \emph{good} candidate architecture.}
+for each candidate architecture.
+For example, if a good architecture is sampled from the NAS but
+is trained with sub-optimal hyperparamters, then the error will be high and the NAS algorithm will reduce the likelihood
+of sampling that architecture which is not the desired property.
+
+% \textcolor{red}{[S.H. I don't understand this statement]
+% AG: What we meant here is that even if NAS sampled a good architecture but you trained it with bad hyperparamters you would get bad errors and the NAS algorithm will reduce the likelihood of sampling that architecture which is not what we want.
 
 
 As a result, \emph{scalability} has become an integral concern for any procedure in the presence of ``big data.'' 
@@ -307,8 +312,8 @@ Less risky approaches focus on moving away from traditional von Neumann architec
 Due to the specialization, the devices become increasingly heterogeneous.
 A huge range of devices has emerged that all try to address this problem in different ways, whereby the key challenge is:
 How do we loop transform and unfold the algorithms best to maximize data reuse and compute efficiency, minimize memory bottlenecks, and limit power consumption while meeting real-time requirements? 
-In the following, we restrict our discussion to the devices that can be realistically used today, and thereby focus on \textbf{specialized architectures}. 
-\textcolor{red}{[S.H. This statement seems out of place.  What is "speculative approaches" referring to?]It is important to remember though that these speculative approaches, as discussed above, will materialize in the future and we will have to deal with an even greater diversity of hardware platforms.}
+%In the following, we restrict our discussion to the devices that can be realistically used today, and thereby focus on \textbf{specialized architectures}. 
+%\textcolor{red}{[S.H. This statement seems out of place.  What is "speculative approaches" referring to?]It is important to remember though that these speculative approaches, as discussed above, will materialize in the future and we will have to deal with an even greater diversity of hardware platforms.}
 
 The choice of hardware type and quantity often boils down to a set of constraints imposed by compute environment (datacenter, cloud, on-premise, edge, mobile), workload type (inference, training), data type (Language, Time Series, Vision, Graph, etc), ML model, usage model (online inference, batch jobs), and user-centric Service-Level Agreements (encryption level, request latency, etc). For large datacenter deployments handling various types of workloads, it is often the case that several platforms must be combined to reduce Total Cost of Ownership (ToC) across all their hardware platforms. It has therefore become increasingly necessary for owners of heterogeneous platforms to think of their systems as large-scale multi-processor computers, a trend sometimes termed Warehouse Scale Computing~\cite{wsc}. For Deep Learning hardware accelerators, these new computers generally take the form of CPU co-processors: a host CPU communicates with other entities in the datacenter, interfaces with disk memory, and formats input data which is then offloaded to the accelerator responsible for executing a user-defined compute graph, or Neural Network. 
 
@@ -343,9 +348,12 @@ As is shown in Figure~\ref{fig:tax}, we classify the compute architectures into 
 DPUs are specialized for this application domain whereby we distinguish the more generic matrix- or tensor-based processor and a spatial processing approach. DPUs can be implemented with either ASICs or FPGAs. All of these architectures will be discussed individually below.
 
 \paragraph*{CPUs} CPUs are widely used for ML applications, and are viewed as largely serial or scalar compute engines (even though high-end variants for cloud deployment may have up to 10s of cores). They are optimized for single thread performance, with implicitly managed memory hierarchies (with multiple levels of caches), and support floating point operations (FP64 and FP32) as well as 8bit and 16bit integer formats with dedicated vector units in most recent variants. Theoretical peak performance tops at 6.8TOPs for FP64 assuming boost clock speed (Cascade lake, 56 cores, 3.8GHz). External memory is currently primarily leveraging DDR4 memory banks with large capacities: Intel's Cascade Lake offers up to 4.5 TebiByte ($2^{40}$ Bytes) which is beyond what any of the other device categories can offer. Access is at maximum speed through high-end hardened memory controllers, offering 282~Gbps bandwidth (for example Cascade Lake with 12 DDR4 channels). 
-\textcolor{red}{[S.H. This sentence is confusing and should be rewritten]In regards to memory bandwidth, this is overall at the lower end of the spectrum, however in many application contexts, this can be compensated through the sophisticated multi-level memory hierarchies.}
+Compared to GPUs and other HBM-enabled devices, the memory bandwidth of CPUs is lower. However for many use cases, this can be compensated through their sophisticated cache hierarchies, combined with mature compiler tools.
+%\textcolor{red}{[S.H. This sentence is confusing and should be rewritten]In regards to memory bandwidth, this is overall at the lower end of the spectrum, however in many application contexts, this can be compensated through the sophisticated multi-level memory hierarchies.}
 Regarding power consumption, CPUs are at the upper end of the spectrum with high-end devices range up to 400\,W~\cite{cascadelake}.
-In the embedded space, ARM processors provide generally popular solutions, in particular when performance requirements are very low and when functionality is required that is not supported by the specialized device variants. In particular, the \textcolor{red}{[S.H. Missing reference]Ethos~\cite{} }family of processing cores is specialized for CNN workloads and as such is considered under the DPU category below.
+In the embedded space, ARM processors provide generally popular solutions, in particular when performance requirements are very low and when functionality is required that is not supported by the specialized device variants. In particular, the 
+%\textcolor{red}{[S.H. Missing reference]
+Ethos~\cite{skillman2020technical} family of processing cores is specialized for CNN workloads and as such is considered under the DPU category below.
 Advantages of CPUs are the generality of the hardware, as well as the ease of programming where design environments have matured over decades. 
 As expected this comes at the cost of lower peak performance and less efficiency compared to the more specialized device families.
 In regards to quantization, CPUs can only leverage this optimization technique for INT8 and INT16 if supported.
@@ -356,7 +364,8 @@ The latest devices in NVIDIA's Volta and Turing architecture families, introduce
 As such they are amongst the highest performant devices in the market for the acceleration of DNNs as they can exploit the high degree of parallelism inherent in this application via increasingly specialized architectural features.
 For example, NVIDIA's Volta is the first generation to incorporate tensor cores as a new feature, as well as improved FP32 and FP64 support for training in a data center setting~\cite{NVIDIAv100}, and also introduced a deep learning accelerator (DLA) in their embedded devices to further reduce power consumption. This specialization brings additional challenges for their usage; there are up to 3 distinct execution units now, namely CUDA cores, tensor cores and the DLA, which don't operate on the workload simultaneously (at least not easily or by default). 
 We therefore don't sum up the peak performance of different execution units, but use only the maximum.
-AMD announced the Vega GPU~\cite{RadeonInstinctGPU} with new deep learning instruction set operations, with the goal of obtaining parity with NVIDIA's high-end Tesla V100 datacenter GPUs.  Also, AMD's  most recent EPYC family supports customized instructions for deep learning~\cite{epyc}. 
+AMD announced the Vega GPU~\cite{RadeonInstinctGPU} with new deep learning instruction set operations, with the goal of obtaining parity with NVIDIA's high-end Tesla V100 datacenter GPUs.  
+Also, AMD's  most recent EPYC family supports customized instructions for deep learning~\cite{epyc}. 
 Both companies offer also low power GPUs for the embedded space, namely the AMD Vega mobile GPU~\cite{radeon-mobile} and NVIDIA Jetson TX2~\cite{nvidia-jetson} and AGX family~\cite{agx}.
 
 In regards to memory, GPUs leverage specialized and highly pipelined GDDR memory, which reduces capacity, but offers much higher bandwidth (up to 732GBps). With NVIDIA's Turing family the latest devices include HBM2 DDR memory stacks~\cite{turing}, which scales the memory access bandwidth to 1TBps and beyond. 
@@ -388,7 +397,7 @@ We differentiate two types of DPUs, which can be implemented with both ASIC tech
 
 \begin{figure*}[h!]
 \centering
-\includegraphics[width=0.8\linewidth]{figures/dpu1.png}
+\includegraphics[width=0.8\linewidth]{figures/DParchitecturesv2.png}
 \caption{DPU architectures: Matrix of Processing Engines (MPE) on the left, and spatial architecture on the right}
 \label{fig:dpu}
 \end{figure*}
@@ -405,7 +414,7 @@ Within the embedded space, where the design constraints are even more stringent,
 Most are secretive about the details of their designs. Intel is investigating several custom accelerators and has for that purpose acquired a number of startups, namely Nervana, Habana and Movidius. Fathom~\cite{movidius-tom} is Movidius' ultra low power Neural Compute Stick (NCS) which operates at about 1\,W.  
 Also, ARM offers specialized CNN processors in the form of their Ethos family, boosting performance up to 4TOPs with support for INT8 and INT16 datatypes.
 
-\textcolor{red}{[S.H. Edits needed to the DPU architectures figure: (1) move the left and right further apart - hard to see the separation.  Remove the black box around everything.  Adjust spacing on / between Functions and Pooling.  Remove ... from Pooling]}
+%\textcolor{red}{[S.H. Edits needed to the DPU architectures figure: (1) move the left and right further apart - hard to see the separation.  Remove the black box around everything.  Adjust spacing on / between Functions and Pooling.  Remove ... from Pooling]}
 
 As mentioned above, DPUs provide specialized datatypes to execute heavily quantized, reduced precision CNN implementations.
 At the extreme, binarized neural networks (which are very high throughput at extremely low power) are exploited in the following ASICs: BinarEye~\cite{binareye}, BNN Custom Fabric~\cite{ando2017brein}, and IBM AI Accelerator~\cite{IBMAI}. Also, Lattice has announced binarized neural network libraries targeting low power FPGA and achieving 1\,TOPs/W~\cite{lattice-bnn}.
@@ -413,7 +422,8 @@ Custom floating point representations are also considered. For example, Microsof
 However, typically the hardened versions in ASICs only support INT8, as lower precisions could potentially limit their application scope. FPGA-based MPE implementations such as Xilinx's xDNN are less constrained and in principle can be customized as needed.
 
 Similar to the GPU, but perhaps to a lesser degree, DPUs leverage input, IFM (input feature map) and OFM (output feature map) parallelism, which requires buffering of inputs and may have adverse affects on latency as well.
-A particular challenge arises in the context of software environments, which differ for all vendors and are less mature than what we have observed for CPUs and GPUs. Typically, they are limited to support execution of very specific layer types (sometimes even restricted in regards to parameter ranges) and neural networks. \textcolor{red}{[S.H. This statement is a bit awkward.  Please rewrite]A given and increasingly expanding modelzoo is supported, however many limitations exist in the form of layer types and are provided as black box solutions which lack transparency and flexibility.} 
+A particular challenge arises in the context of software environments, which differ for all vendors and are less mature than what we have observed for CPUs and GPUs. Typically, they are limited to support execution of very specific layer types (sometimes even restricted in regards to parameter ranges) and neural networks, whereby the range of layer types and neural network models is continously expanding.
+%\textcolor{red}{[S.H. This statement is a bit awkward.  Please rewrite]A given and increasingly expanding modelzoo is supported, however many limitations exist in the form of layer types and are provided as black box solutions which lack transparency and flexibility.} 
 
 In summary, through their specialization these implementations minimize hardware cost, maximize performance and optimize efficiency by exploiting specific precision arithmetic with a specialized instruction set and customized memory system. However, in order to gain the performance advantage the algorithms need to be adapted to leverage these features. 
 
@@ -439,17 +449,11 @@ Each layer comes at a resource cost overhead and there is a maximum number of la
 Once a spatial DPU has been leveraged and the architecture is specialized for a very specific CNN, the architecture can be further customized in regards to minimum precision.  By supporting only the bits as needed per layer of the CNN they can achieve even higher performance and efficiency, while in an MPE, the hardware will support the maximum precision that is required over the whole network. In regards to customized precisions and spatial architectures, FINN has pioneered the first binarized neural network accelerators \cite{umuroglu2017finn,fraser2017scaling} and provided many proof points for customized reduced precision implementations~\cite{blott2018finnr}. 
 This flexibility comes at a cost, in the form of programming complexity, and they are extremely difficult to characterize in general, as the performance characteristics depend on the specifics of the hardware architecture that has been implemented.
 
-\paragraph*{Further Variants}
-\textcolor{red}{[S.H. This section is kinda abrupt.  Cut, or smooth the transitions into it.  Also, how does the next paragraph relate to this section?]
-Others exploit sparse computing engines, such as EIE and its successor ESE~\cite{han2017ese}, SCNN~\cite{parashar2017scnn}, Cnvlutin~\cite{cnvlutin}, Cambricon-S and Cambricon-X~\cite{zhang2016cambricon}. These are the only architectures which can benefit from irregular sparsity.}
-
-% \begin{figure}[h!]
-% \centering
-% \includegraphics[width=0.6\linewidth]{figures/runtime_preicison.png}
-% \caption{Run-time programmable precision.}
-% \label{fig:bismo}
-% \end{figure}
-
+\paragraph*{Further Variants of DPUs}
+Beyond the previously discussed spatial DPUs and MPEs, there are many more variants.
+%\textcolor{red}{[S.H. This section is kinda abrupt.  Cut, or smooth the transitions into it.  Also, how does the next paragraph relate to this section?]
+Some exploit sparse computing engines for example, such as EIE and its successor ESE~\cite{han2017ese}, SCNN~\cite{parashar2017scnn}, Cnvlutin~\cite{cnvlutin}, Cambricon-S and Cambricon-X~\cite{zhang2016cambricon}. 
+These are the only architectures which can benefit from irregular sparsity.
 Finally, another dimension for customization of precision is to optimize over the execution- or run-time of a CNN.
 In other words, beyond using statically fixed reduced precision, where the hardware operates with a fixed precision for all variables, some approaches explore run-time configurable bit precision which allows for the exploitation of bit-parallelism in the arithmetic. 
 % This is also referred to as transprecision computing and illustrated in Figure~\ref{fig:bismo}. 
@@ -643,7 +647,7 @@ While this concept can be applied to both MPE and spatial architectures, it make
 \textbf{Conventional} & & & & & & & \\
 CPU & Medium & High & High & Medium & Low & High & Both \\
 DPU-MPE & High & Medium-High & Medium & High & Medium & Low-Medium & Inference \\
-e.g. DPU-MPE (Gaphcore IPU) & Medium & Medium & Medium & High & Medium & Medium & Inference \\
+% e.g. DPU-MPE (Gaphcore IPU) & Medium & Medium & Medium & High & Medium & Medium & Inference \\
 DPU-Spatial & High & Low & Medium & High & High & Low & Inference \\
 GPU (NVIDIA A100) & High & High & High & High & Medium & High & Both \\
 \hline \hline
@@ -651,19 +655,19 @@ GPU (NVIDIA A100) & High & High & High & High & Medium & High & Both \\
 Cerebras CS-1 & Very High & Medium & High & Very High & Medium & Medium & Both \\
 \hline
 \end{tabular}}
-\caption{Characterization of types of hardware based on important metrics -- these are used as input to Fig.~\ref{fig:hwcompare}.
+\caption{Characterization of types of hardware based on important metrics.% -- these are used as input to Fig.~\ref{fig:hwcompare}.
 \label{tab:hwcompare}}
 \end{table}
 
 
-\begin{figure}[h!]
-\centering
-\includegraphics[width=0.8\linewidth]{figures/radar_chart.png}
-\caption{Qualitative comparison of popular server-class hardware platforms.}
-\label{fig:hwcompare}
-\end{figure}
+%\begin{figure}[h!]
+%\centering
+%\includegraphics[width=0.8\linewidth]{figures/radar_chart.png}
+%\caption{Qualitative comparison of popular server-class hardware platforms.}
+%\label{fig:hwcompare}
+%\end{figure}
 
-\textcolor{red}{[S.H. Table: seems strange to have two different MPU's listed.  Diagram - seems superfluous, since it has the same info as the table - I'd cut it.]}
+%\textcolor{red}{[S.H. Table: seems strange to have two different MPU's listed.  Diagram - seems superfluous, since it has the same info as the table - I'd cut it.] [MB: Agreed, I'm okay with removing the graphcore IPU example. Regarding the radar chart, you're right of course, this is just a visualization of the same thing. If you're stuck for space, feel free to cut it]}
 
 \paragraph*{Summary of Conventional CMOS Hardware Architectures}
 
@@ -693,7 +697,7 @@ Traditional software programming is complicated, and parallel high-performance p
 For machine learning applications, a common practice is to profile the application on CPU (or GPU) to identify the bottlenecks to be offloaded onto the reprogrammable logic to improve latency, throughput, or energy efficiency of the application as a whole. Then, part of the application can remain on the CPUs to control the execution and interact with the rest of the scientific setup.
 
 \paragraph*{FPGA Programming}
-FPGA are configurable integrated circuits that provide a good tradeoff in
+FPGA are configurable integrated circuits that provide a good trade off in
 terms of performance, power consumption, and flexibility with
 respect to other hardware paradigms. However, it is a challenging and lengthy task to program FPGAs. FPGA programming has traditionally been a job for hardware designers familiar with digital design and computer architecture. These requirements lead to a steep learning curve for software developers and other domain experts. In order to lower the entry barrier, there has been a growing focus on designing FPGA hardware at a higher level of abstraction. As a result, various approaches have brought FPGA development into the mainstream by allowing developers to design for FPGAs at a higher level using familiar languages such as C, C++, OpenCL, and in some cases, even C\# \cite{kiwiHLS}. Here an important question arises: what are the additional advantages of designing the hardware at a higher level of abstraction? High-level languages (HLLs) include various constructs and design patterns that are more functionally expressive. Furthermore, the amount of time spent in the verification of the design is also a crucial factor. Hardware-description languages such as Verilog or VHDL focus on the final implementation details and, because of that, are more verbose. Bigger code repositories are not easy to verify for functional correctness. On the other hand, HLLs are more compact and simulate faster. Thus, a designer can do more verification in the same span of time. Despite these advances, FPGA programming remains complex. This has compelled academia and industry to develop new compilers, frameworks, and libraries to facilitate the hardware design.
 
@@ -703,9 +707,11 @@ High-level synthesis (HLS), also known as behavioral or algorithmic synthesis, i
 
 Over the past three decades, many HLS tools have been proposed. The work in \cite{survey_evaluation} presents an evaluation of different academic and commercial HLS tools tested on the same set of benchmarks. These tools have different input languages, perform different internal optimizations, and produce different quality results, even for the same input languages. The results show that each HLS tool can significantly improve performance once the designer has mastered benchmark-specific optimizations and constraints. However, academic HLS tools have a higher learning curve because of a minor focus on usability. Commercial HLS tools have an advantage because of their better documentation, robustness, and design verification integration.
 
-In terms of input languages for HLS, most of the HLLs are variants of the C language. However, there are a few limitations to generate hardware from a pure C specification. First, C lacks the notion of timing and concurrency. The designer must rely on the HLS tool to create clock-based timing. Similarly, the designer must specify the concurrency model or rely on HLS to extract the parallelism among operations or processes. Second, C lacks bit-accurate data types. It only provides ``native'' data types such as \texttt{char}, \texttt{int}, and \texttt{long}, whose size is a multiple of a byte. Thirdly it lacks the concepts of hardware interfaces and communication channels. SystemC was adopted as HLS language to address all of these limitations~\cite{6838614}. However, SystemC still has not entirely made inroads in the FPGA community. Another common problem with all C-based languages, including SystemC, is memory access and modeling. These languages have a flat memory model, and memory access is done through pointers. Either HLS has to decide how to implement the memories in hardware, or the designer must leverage additional HLS directives or libraries to model the memory sub-system properly. Finally, in the family of the C-based specification languages for HLS, the SYCL language is emerging. SYCL (pronounced sickle) is an industry-driven standard that adds parallelism to C++ to design heterogeneous systems. SYCL programs perform best when paired with SYCL-aware C++ compilers such as the open-source data-parallel C++ (DPC++) compiler \cite{dpcplus}.
+In terms of input languages for HLS, most of the HLLs are variants of the C language. However, there are a few limitations to generate hardware from a pure C specification. First, C lacks the notion of timing and concurrency. The designer must rely on the HLS tool to create clock-based timing. Similarly, the designer must specify the concurrency model or rely on HLS to extract the parallelism among operations or processes. Second, C lacks bit-accurate data types. It only provides ``native'' data types such as \texttt{char}, \texttt{int}, and \texttt{long}, whose size is a multiple of a byte. Third, it lacks the concepts of hardware interfaces and communication channels. SystemC was adopted as HLS language to address all of these limitations~\cite{6838614}. However, SystemC still has not entirely made inroads in the FPGA community. Another common problem with all C-based languages, including SystemC, is memory access and modeling. These languages have a flat memory model, and memory access is done through pointers. Either HLS has to decide how to implement the memories in hardware, or the designer must leverage additional HLS directives or libraries to model the memory sub-system properly. Finally, in the family of the C-based specification languages for HLS, the SYCL language is emerging. SYCL (pronounced sickle) is an industry-driven standard that adds parallelism to C++ to design heterogeneous systems. SYCL programs perform best when paired with SYCL-aware C++ compilers such as the open-source data-parallel C++ (DPC++) compiler \cite{dpcplus}.
 
-Apart from the variations of C, Bluespec is a language for the description and synthesis of hardware based on SystemVerilog. It provides levels of abstraction with a clean semantic that highlights aspects of the architecture. It can be considered a high-level functional HDL, where modules are implemented as rules using SystemVerilog syntax. Those rules are called guarded atomic actions and express behaviors as concurrently cooperating finite state machines (FSMs). Another recent language among FPGA designers is Chisel. It is based on Scala and supports hardware definition using highly parameterized generators, object-oriented and functional programming. Similar to an HLS flow, it compiles into an RTL Verilog implementation. 
+Apart from the variations of C, Bluespec is an open-source language for the description and synthesis of hardware based on SystemVerilog. It provides levels of abstraction with a clean semantic that highlights aspects of the architecture. It can be considered a high-level functional HDL, where modules are implemented as rules using SystemVerilog syntax. Those rules are called guarded atomic actions and express behaviors as concurrently cooperating finite state machines (FSMs). Another recent language among FPGA designers is Chisel. It is based on Scala and supports hardware definition using highly parameterized generators, object-oriented and functional programming. Similar to an HLS flow, it compiles into an RTL Verilog implementation. 
+
+
 
 \begin {table} [h]
 	\begin{center}
@@ -713,38 +719,40 @@ Apart from the variations of C, Bluespec is a language for the description and s
 		\begin{tabular}{ | l | l | l | p{0.1cm}|}
 			\hline
 			\textbf{Domain and Interfaces} &  \textbf{DSLs and Frameworks} \\ \hline  
-			Signal-Processing &  HDL Coder, LabView, Spiral, VSIPL  \\            \hline
-			Networking  &  SNORT \cite{snort}, Click, P4\\            \hline
-			Databases & Glacier  \\ \hline
-			Machine Learning & OptiML  \\ \hline 
+			Signal-Processing &  HDLCoder \cite{dsl}, LabView \cite{dsl}, Spiral \cite{SPIRAL}, VSIPL \cite{VSIPL}  \\            \hline
+			Networking  &  SNORT \cite{snort}, Click \cite{click}, P4 \cite{p4lang}, Floem \cite{floem}\\            \hline
+			Databases & Glacier \cite{glacier}  \\ \hline
+			Machine Learning & OptiML \cite{optiML}  \\ \hline 
 			Numerics &Verilog
-			AMS   \\            \hline
-			Streaming & Maxeler, SCORE, Lime  \\            \hline
-			Dataflow & OpenDF, OpenSpatial  \\            \hline
-			Graphs & GraphStep, GraphGen  \\            \hline
-			Data Parallel & MapReduce, Accelerator, FCUDA, Aetherling, SuSy  \\            \hline
-			Circuit Generators & Flopoco, JHDL, PAMDC  \\            \hline
-			Image processing & HIPACC, FROST, Darkroom, RIPL, PolyMage \\            \hline
- 			Static &  JBits, TVM \cite{tvm}, TAPAS \\            \hline
-				Dynamic &  PyRTL \cite{pyrtl}, APARAPI \cite{arapa}, TornadoVM\cite{tornado}, Caldeira, \\ & Lime,
-		LINQits, DHDL, Spatial \\            \hline
-		Type Systems & DAHLIA \\ \hline
-		Verification & Kami \\ \hline
-		Virtualization & Cascade \\ \hline
+			AMS \cite{verilogAMS}  \\            \hline
+			Streaming & Maxeler \cite{maxeler}, SCORE \cite{score}, Lime \cite{lime}, Aetherling \cite{aetherling}  \\            \hline
+			Dataflow & OpenDF \cite{openDF}, OpenSpatial \cite{dsl}  \\            \hline
+			Graphs & GraphStep \cite{graphstep}, GraphGen \cite{graphgen}  \\            \hline
+			Data Parallel & MapReduce \cite{dsl}, Accelerator \cite{accelerator}, FCUDA \cite{fcuda}, SuSy \cite{susy}  \\            \hline
+			Circuit Generators & Flopoco \cite{flopoco}, JHDL \cite{jhdl}, PAMDC \cite{pmdc}  \\            \hline
+			Image processing & HIPACC \cite{hipacc}, FROST \cite{frost}, Darkroom \cite{darkroom}, RIPL \cite{ripl}, PolyMage \cite{polymage} \\            \hline
+ 			Static &  JBits \cite{jbits}, TVM \cite{tvm}\\            \hline
+ 			Task based & TAPAS \cite{tapas} \\            \hline
+				Dynamic &  PyRTL \cite{pyrtl}, APARAPI \cite{arapa}, TornadoVM\cite{tornado}, Caldeira et al. \cite{caldeira}, \\ & LINQits \cite{linqits}, DHDL \cite{dhdl}, Spatial \cite{spatial} \\            \hline
+		Type Systems & DAHLIA \cite{dahlia}\\ \hline
+		Verification & Kami \cite{kami} \\ \hline
+		Virtualization & Cascade \cite{cascade} \\ \hline
 		\end{tabular}
 	\end{center}
 \end {table}
 
-Although the languages mentioned above have helped create efficient hardware and significantly shorten the development time, specific coding techniques are still necessary. Also, the growth and diversification of the application domains have shown the limitations of these programming languages. This has further pushed the level of abstraction to domain-specific languages (DSLs). In recent years, we are observing the growth of a considerable corpus of DSLs and frameworks for FPGA design \cite{7577380, transparent}. In a DSL-based approach, the users and the tools can use domain knowledge to apply static and dynamic optimizations. However, a domain-specific HLS tool requires an appropriate compiler and a development environment that caters to the target domain. Table~\ref{DSLs} shows some of the DSLs and frameworks developed over the years for FPGA computing organized by domains of application. Although all the approaches in the table are diverse in terms of applications, the interesting question is, what are the common denominators? To the best of our knowledge, most of the approaches are broadly based on two approaches: either the DSL specification gets directly compiled into the RTL implementation, or the approach leverages source-to-source compilers. In the latter case, the DSL compiler produces an equivalent source code in a different programming language, for example, C++, for a more standard HLS flow. 
+Although all these languages have helped create efficient hardware and significantly shorten the development time, specific coding techniques are still necessary. Also, the growth and diversification of the application domains have shown the limitations of these programming languages. This has further pushed the level of abstraction to domain-specific languages (DSLs). In recent years, we are observing the growth of a considerable corpus of DSLs and frameworks for FPGA designs \cite{dsl, transparent}. In a DSL-based approach, the users and the tools can use domain knowledge to apply static and dynamic optimizations. However, a domain-specific HLS tool requires an appropriate compiler and a development environment that caters to the target domain. Table~\ref{DSLs} shows some of the DSLs and frameworks developed over the years for FPGA computing organized by domains of application. Although all the approaches in the table are diverse in terms of applications, the interesting question is, what are the common denominators? To the best of our knowledge, most of the approaches are broadly based on two approaches: either the DSL specification gets directly compiled into the RTL implementation, or the approach leverages source-to-source compilers. In the latter case, the DSL compiler produces an equivalent source code in a different programming language, for example, C++, for a more standard HLS flow.   As a final concluding remark for this paragraph, the efforts for designing 
+better HLS compilers and languages is a significant part of present FPGA research. Furthermore, the work in Table 5 by no means is an exhaustive list. The area of DSLs for FPGA easily outnumbers the work presented in the table.
 
 \paragraph*{Software and Hardware Integration}
 
-Running an application on a microprocessor may be a more accessible approach than designing and running specialized hardware, but at the expense of poor performance and higher power costs. This dilemma often is paired with the hardware and software partitioning problem, also known as Hardware/Software codesign. It is the process of dividing an application between a microprocessor component (if any) and one or more custom hardware or co-processors components to achieve desired performance goals. Understandably there exists a plethora of research work in this area. The authors in \cite{rfu} have provided background information on notable aspects of older FPGA technologies and simultaneously explained the fundamental architectures and design methods for codesign. Furthermore, the work in \cite{microarchitecture} is another comprehensive study that aims to evaluate and analyze the microarchitectural characteristics of state-of-the-art CPU-FPGA platforms in depth. That paper covers most of the shared-memory platforms with detailed benchmarks.
+Running an application as software on a microprocessor is more accessible than designing and running specialized hardware, but it may result in poor performance and higher power costs. On the other hand, partitioning an application into software and hardware components is challenging. This process, also known as hardware/software codesign, divides an application between software running on the microprocessor and one or more custom hardware or co-processors components to achieve desired performance goals. Understandably there exists a plethora of research work in this area. The authors in \cite{rfu} have provided background information on notable aspects of older FPGA technologies and simultaneously explained the fundamental architectures and design methods for codesign. Furthermore, the work in \cite{microarchitecture} is another comprehensive study that aims to evaluate and analyze the microarchitectural characteristics of state-of-the-art CPU-FPGA platforms in depth. That paper covers most of the shared-memory platforms with detailed benchmarks.
 
-Nonetheless, partitioning involves various design decisions, and it is generally considered a complex problem. One of the critical challenges is enabling higher design productivity and a more accessible way to use FPGAs for users unfamiliar with the underlying concepts. One way of doing this is to provide standardization and abstraction, usually supported and enforced by an operating system. Operating systems simplify the programming interface through an abstracted programming model.
+%Nonetheless, partitioning involves various design decisions. One of the critical challenges is enabling higher design productivity and a more accessible way to use FPGAs for users unfamiliar with the underlying concepts. One way of doing this is to provide standardization and abstraction, usually supported and enforced by an operating system. Operating systems simplify the programming interface through an abstracted programming model.
 
-\textcolor{red}{[S.H. This section is a but choppy, and needs smoothing.  Also odd to be exclusively Xilinx.]The two leading FPGA vendors, Xilinx and Intel, have their own solutions. The Xilinx Runtime Library (XRT) \cite{XRT} is implemented as a combination of userspace and kernel driver components. It supports both PCIe-based boards and MPSoC based embedded platforms. Similarly, Xilinx SDSoc \cite{sdsoc} and SDAccel \cite{sdaccel} became publicly available later in late 2015; the former works only on select boards of the Zynq family of FPGAs, the latter only on selected PCIe-based boards for OpenCL computing. Since 2020 Xilinx has introduced Vitis \cite{vitis} as a unified platform. Vitis Unified Software Platform is a comprehensive development environment to build and seamlessly deploy accelerated applications on Xilinx platforms, including on-premises Alveo cards, FPGA-instances in the cloud, and embedded platforms.}
-%In addition, the recent efforts of Xilinx under the flagship Versal \cite{versal} is also a step towards codesign applications. Intel has the Open Programmable Acceleration Engine (OPAE) \cite{intelopae} which is the API library for programmers writing host applications that will leverage the FPGA acceleration. Likewise, Intel oneAPI \cite{inteloneapi} is an open, unified programming model built on standards to simplify the development and deployment of data-centric workloads across CPUs, GPUs, FPGAs, and other accelerators.
+%\textcolor{red}{[S.H. This section is a but choppy, and needs smoothing. Also odd to be exclusively Xilinx.][MB: I can't help with that}
+The two leading FPGA vendors, Xilinx and Intel, have their own solutions. The Xilinx Runtime Library (XRT) \cite{XRT} is implemented as a combination of userspace and kernel driver components. It supports both PCIe-based boards and MPSoC based embedded platforms. Similarly, Xilinx SDSoc \cite{sdsoc} and SDAccel \cite{sdaccel} became publicly available later in late 2015; the former works only on select boards of the Zynq family of FPGAs, the latter only on selected PCIe-based boards for OpenCL computing. Since 2020 Xilinx has introduced Vitis \cite{vitis} as a unified platform. Vitis Unified Software Platform is a comprehensive development environment to build and seamlessly deploy accelerated applications on Xilinx platforms, including on-premises Alveo cards, FPGA-instances in the cloud, and embedded platforms.
+In addition, the recent efforts of Xilinx under the flagship Versal \cite{versal} is also a step towards codesign applications. Intel has the Open Programmable Acceleration Engine (OPAE) \cite{intelopae} which is the API library for programmers writing host applications that will leverage the FPGA acceleration. Likewise, Intel oneAPI \cite{inteloneapi} is an open, unified programming model built on standards to simplify the development and deployment of data-centric workloads across CPUs, GPUs, FPGAs, and other accelerators.
 
 Apart from vendor solutions, academia and the open-source community have also attempted to simplify the integration of applications, operating systems, and hardware acceleration. For a comprehensive analysis, the reader is referred to the works in \cite{reconfig_os, connectal}, which give a historical review and summary on ideas and key concepts to include reconfigurable computing aspects in operating systems. They also present an overview of published and available operating systems of the last 30 years targeting reconfigurable computing. Similarly, the design exploration and engineering of FPGA drivers that are portable across multiple physical interfaces (PCIe, Ethernet, optical links) have remained a significant part of HW/SW codesign research. The challenges come from the variety of FPGA boards, the plethora of interfaces, and the diverse user requirements. Fundamentally, the FPGA drivers should allow the designer to load or reconfigure an application bitstream and support data transfers between the FPGA and host.
 
@@ -754,9 +762,53 @@ Despite various existing OS and driver solutions, an open problem that remains i
 
 \paragraph*{The Case for ML Frameworks for FPGA Design}
 
-Machine learning is one of the fastest growing application domains and over the years there has been an increasing demand of an established framework that caters to the needs of ML researchers and domain experts working with FPGAs. The main reason is the complexity of the traditional approaches that require significant engineering effort. Two main ML frameworks are making the effort to fill this vacuum: hls4ml and FINN. Considering the aforementioned tools, compilers, programming languages and co-design solutions, both hls4ml and FINN have the potential to reach a broader scientific community. \textcolor{red}{Add a description of FINN, while hls4ml has been described in Sec. 2.1.4}.
+\begin{figure}
+\centering
+\includegraphics[width=0.8\linewidth]{figures/FINN_flow_for_paper.pdf}  
+\caption{FINN Compiler Flow}\label{figures:finnflow}
+\end{figure}
 
-\textcolor{red}{[S.H. Need a section to wrap up 4.4.  Summary, conclusion, what have you.]}
+Machine learning is one of the fastest growing application domains and over the years there has been an increasing demand for FPGA-based implementations, as the FPGA can acheive latency and throughput and efficiency requirements through extreme customization of the hardware design leveraging reduced precision arithmetic, streaming dataflow implementations (as were introduced as spatial architectures), and fine-granular sparsity.  In order to enable a broad spectrum of users with these customizations and to reduce the significant engineering effort, compilers and tools are needed that cater to the needs of ML researchers and domain experts working with FPGAs. Two main ML frameworks are making the effort to fill this vacuum: hls4ml and FINN. Considering the aforementioned tools, compilers, programming languages and co-design solutions, both hls4ml and FINN have the potential to reach a broader scientific community. 
+%\textcolor{red}{Add a description of FINN, while hls4ml has been described in Sec. 2.1.4}.
+To get a better understanding how such a tool flow works, we consider the FINN compiler in more detail in the following paragraphs.
+
+
+The \textbf{FINN compiler}~\cite{umuroglu2017finn} is an open source framework to generate spatial DPU or streaming dataflow accelerators on FPGAs. 
+The FINN compiler has a highly modular structure as shown in Figure~\ref{figures:finnflow}, which allows the user to interactively generate a specialized architecture for a specific DNN. 
+The framework provides a frontend, transformation and analysis passes and multiple backends to explore the design space in terms of resource and throughput constraints.
+Brevitas~\cite{brevitas}, a PyTorch library for quantization-aware training, is the \textbf{frontend} used in this work.
+It enables training DNNs with weights and activations quantized down to a few bits, then exports the trained network into the intermediate representation (IR) used by the FINN compiler. 
+The \textbf{transformation and analysis passes} help to generate an efficient representation of the DNN. Finally, the \textbf{backend} contains a code generator that creates synthesizable accelerator descriptions, which can be implemented as either a standalone Vivado IPI component or integrated into various shells, including Xilinx Alveo boards and PYNQ embedded platforms.
+
+For further processing, the DNN model must be converted into the IR of the FINN compiler first. The frontend stage takes care of this by converting the PyTorch description into the IR, called FINN-ONNX. This IR is based on ONNX~\cite{onnx_github}, an open-source interchange format which uses a protobuf description to represent DNNs. It comes with several standard operators and allows the user to easily create their own operators to customize the model. The nodes represent layers and edges carry outputs from one layer to become inputs to another. The feature to customize the ONNX representation is used in the framework to add application specific nodes and attributes. Each node is tagged with the quantization of its inputs, parameters (weights and activations) and outputs to enable quantization-aware optimizations and the mapping to backend primitives optimized for quantized computation. During the compiler flow the nodes will be transformed into a backend-specific variants via a series of transformation passes. 
+
+The main principle of the \textbf{FINN compiler} are \textbf{graph transformation} and \textbf{analysis passes}, which change or analyze the IR of the model. A pass is a function that takes the IR graph as input and either (a) transforms the DNN by looking for a certain pattern, changing the graph in a specific manner and outputs the modified graph, or (b) \textbf{analyzes} the DNN to produce metadata about its properties. To bring the model into a representation from which code can be produced and finally the hardware accelerator can be generated, various transformations must be applied. The main transformations involved  are summarized below.
+
+Although the PyTorch description of the network is mostly quantized, it may still contain some floating-point operations from e.g. preprocessing, channelwise scaling or batchnorm layers. In order to generate a hardware accelerator from the model, these floating-point operations must be absorbed into multi-level thresholds, so that a functionally identical network of integer operations is created. The transformation to achieve this is called \textbf{streamlining}, as described by Umuroglu and Jahre~\cite{DBLP:journals/corr/abs-1709-04060}. During streamlining, floating-point operations are moved next to each other, collapsed into a single operation and absorbed into succeeding multi-thresholding nodes.
+
+Next, high-level operations in the graph are \textbf{lowered} to simpler implementations that exist in the FINN HLS-based hardware library. For instance, convolutions will be lowered to a sliding window node followed by a matrix-vector node, while pooling operations will be implemented by sliding window followed by an aggregation operator. The resulting graph now consists of layers that can be converted to hardware building block equivalents. Each node corresponds to a Vivado HLS C++ function call, from which an IP block per layer can be generated using Vivado. The resources utilized by each hardware building blocks can be controlled through specific attributes passed from FINN to Vivado. For example, multiplications can be performed with LUTs or DSP blocks, and parameters can be stored in distributed, Block, or Ultra RAM.
+
+Finally, the \textbf{folding} process assigns compute resources to each layer to obtain the desired throughput with a balanced pipeline by fine-tuning their degree of parallelism. 
+To enable per-layer specialization without reconfiguration and minimize latency, FINN creates dedicated per-layer hardware interconnected with FIFO channels, thus the outermost loop across $L$ layers is always fully pipelined.
+Once the folding is specified, resource estimates can be produced for each node. 
+There are several ways to estimate the resources. Even before IP blocks are generated from the HLS layers, an estimate of the resources per layer can be made by using analytical models based on the concepts from the FINN-R paper~\cite{blott2018finnr}. 
+Estimations can also be extracted from Vivado HLS after IP generation, though these results are still estimations that may differ from the resource usage of the final implementation due to synthesis optimizations.
+
+The \textbf{Backend} is responsible for consuming the IR graph and backend-specific information to create a deployment package, also implemented using the transformation concept.
+To get the inference accelerator, between the layers FIFOs are inserted, which can be sized automatically by the FINN compiler. Afterwards the single IP blocks are stitched together and synthesized. The stitched IP can be manually integrated into a system, or inserted into an appropriate shell for the target platform. If the target platform is an Alveo card, the design is exported as a Vivado Design Checkpoint (DCP), followed by generation of Xilinx Vitis~\cite{kathail2020xilinx} object files and linking.
+
+
+%\textcolor{red}{[S.H. Need a section to wrap up 4.4.  Summary, conclusion, what have you.]}
+\paragraph*{Summary of Hardware/Software Codesign and FPGA-based Systems}
+%In summary, we analysed three categories of standard CMOS-based hardware architectures that are leveraged for CNN inference, namely common CPUs, SIMD based vector processors such as GPUs, and DPUs which are specialized architectures for acceleration of deep learning workloads. For DPUs, we distinguish between tensor processors which leverage a matrix of processing engines and spatial architectures which can be further specialized for specific topologies using FPGAs.
+In summary, CPUs are the most general solution for CNN inference but high in power. GPUs and DPUs offer highest performance, whereby GPU are more expensive in regards to energy cost. FPGAs offer several tradeoffs that may well fit rapidly moving application domains. %Spatial DPU architectures excel at latency and provide highest compute efficiency through maximized customization. 
+%CPUs, GPUs and DPUs (MPE) use a sequential layer by layer compute model whereas spatial DPUs execute all layers of the network concurrently. 
+%Hardened topologies in form of ASICs, CPU and GPU offer a fixed set of native dataypes, whereas 
+FPGAs can adopt any precision and numerical representation, which provides utmost flexibility and leverages optimization with quantization to the maximum, whereas hardened approaches need to default to the next higher supported precision where the reduced precision variable can be embedded.
+Furthermore through the spatial dataflow approach much lower latency can be achieved.
+However the complexity of programming FPGAs limits their deployment.
+Tools such as hls4ml and FINN are frameworks specifically created for the ML domain where they automate the process of hardware generation for the end-user thus hiding the associated design complexity of FPGAs and enabling them for the previousl discussed end applications.
+
 
 %\textbf{FPGA supremacy for data acquisition and IO integration:}
 %
@@ -883,9 +935,9 @@ In the simplest SNN models, the information is encoded in spike-time correlation
 
 A compact implementation of LIF neuron with biological, ms-scale integration times using conventional circuit technology is challenging because of the large capacitors that are required. Leaky integration circuits utilizing volatile memristors (e.g., based on filamentary \cite{Zhang2018Small}, interfacial \cite{Lashkare2018}, and Mott insulator \cite{Adda2018} switching mechanisms) have been suggested to address this problem. In such implementations, the integrated current is encoded with a conductive state of the volatile memory device. Neuron spiking functionality was demonstrated with threshold-switching (volatile) memory devices that feature S-type negative differential resistance (NDR) $I$-$V$ characteristics \cite{Pickett2013}. This approach's general idea is similar to the oscillator circuits based on S-type (NDR) device connected to a resistor-capacitor circuit \cite{Kesim2019}. LIF neurons based on spin-torque magnetic memories were simulated in Ref. \cite{Sengupta2016}. In such a neuron,  spin-torque oscillations are employed to generate spikes, while incremental magnetization and its relaxation mimic integration and leakage, respectively.
 
-STP to LTP transition has been emulated with solid-state-electrolyte devices – see, e.g., original work in \cite{Ohno2011} and more recent work on ``diffusive" memristors \cite{Wang2017NatMat}. Specifically, the short and infrequent write pulses result in the formation of thin filaments, which are unstable and quickly dissolve, representing a short memory. However, a thicker and more stable filament can be formed by applying repeated and/or longer write pulses, thus mimicking transition to the LTP.  Different STDP window implementations, e.g., using PCM \cite{Kuzum2011} or metal-oxide ReRAM \cite{Prezioso2016} devices, have been suggested by carefully selecting the shape of pre and post-synaptic voltage pulses – see a comprehensive review of the emulated synaptic plasticity with memristive devices in Refs. \cite{Serrano-Gotarredona2013, Saighi2015}.
+STP to LTP transition has been emulated with solid-state-electrolyte devices – see, e.g., original work in \cite{Ohno2011} and more recent work on ``diffusive" memristors \cite{Wang2017NatMat}. Specifically, the short and infrequent write pulses result in the formation of thin filaments, which are unstable and quickly dissolve, representing a short memory. However, a thicker and more stable filament can be formed by applying repeated and/or longer write pulses, thus mimicking transition to the LTP.  Different STDP window implementations, e.g., using PCM \cite{Kuzum2011} or metal-oxide ReRAM \cite{Prezioso2016} devices, have been suggested by carefully selecting the shape of pre and post-synaptic write voltage pulses – see a comprehensive review of the emulated synaptic plasticity with memristive devices in Refs. \cite{Serrano-Gotarredona2013, Saighi2015}.
 
-Several small-scale spiking neuromorphic systems based on emerging device technologies were demonstrated, including coincidence detection via STDP mechanism based on metal-oxide memristors \cite{Prezioso2018, Pedretti2017} and temporal data classification with diffusive memristors \cite{Wang2018NatElec}.  However, the overall progress in such advanced hardware has been much slower compared to simpler ANNs inference accelerators. The main reason is more demanding functionality from emerging devices in such applications and hence the more severe impact of device variations on the SNN operation and performance. For example, SNNs rely on fixed-magnitude spikes to update the conductance of multiple devices in parallel. Because of that, change in the conductances could vary drastically even with minor variation in $I$-$V$'s switching voltages, which in turn leads to very significant variations in STDP characteristics \cite{Prezioso2018}. On the other hand, implementation of simpler ex-situ trained ANNs is much less challenging because the write amplitude voltages in such networks can be adjusted uniquely for each device based on the feedback information during conductance tuning \cite{Alibart2012}. 
+Several small-scale spiking neuromorphic systems based on emerging device technologies were demonstrated, including coincidence detection via STDP mechanism based on metal-oxide memristors \cite{Prezioso2018, Pedretti2017} and temporal data classification with diffusive memristors \cite{Wang2018NatElec}.  However, the overall progress in such advanced hardware has been much slower compared to simpler ANNs inference accelerators. The main reason is more demanding functionality from emerging devices in such applications and hence the more severe impact of device variations on the SNN operation and performance. For example, SNNs rely on fixed-magnitude spikes to update the conductance of multiple devices in parallel. Because of that, change in the conductances could vary drastically even with minor variation in $I$-$V$'s switching voltages, which in turn leads to very significant variations in STDP characteristics \cite{Prezioso2018}. On the other hand, as already mentioned above, implementation of simpler ex-situ trained ANNs is much less challenging because the write amplitude voltages in such networks can be adjusted uniquely for each device based on the feedback information during conductance tuning \cite{Alibart2012}. 
 
 Superconductor circuits, e.g., based on rapid single flux quantum (RSFQ) variety \cite{Likharev1991}, are naturally suited for spiking circuits due to information encoding in SFQ voltage pulses. For example, Josephson Junction spiking neurons operating at up to 50 GHz range have been demonstrated in Ref. \cite{Segall2017}. The historical challenges of such an approach include inferior fabrication technology (which may finally change given the enormous investments in superconductor quantum computing), the low-temperature operation that limits its applications, and the lack of efficient analog memory circuits \cite{Likharev2012}. The photonic spiking neural networks (e.g., Ref. \cite{Feldmann2019}) and hybrid superconductor / optoelectronic neuromorphic circuits \cite{Buckley2017} share the same challenges of the already discussed photonic neuromorphic inference approaches.
 

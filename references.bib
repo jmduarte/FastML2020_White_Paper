@@ -58,15 +58,26 @@
     year = "2018"
 }
 
-@article{Bedaque:2020pct,
-    author = "Bedaque, Paulo and others",
-    title = "{Report from the A.I. For Nuclear Physics Workshop}",
-    eprint = "2006.05422",
+@article{AbdulKhalek:2021gbh,
+    author = "Abdul Khalek, R. and others",
+    title = "{Science Requirements and Detector Concepts for the Electron-Ion Collider: EIC Yellow Report}",
+    eprint = "2103.05419",
     archivePrefix = "arXiv",
-    primaryClass = "physics.comp-ph",
-    reportNumber = "JLAB-CST-20-002",
-    month = "6",
-    year = "2020"
+    primaryClass = "physics.ins-det",
+    reportNumber = "BNL-220990-2021-FORE, JLAB-PHY-21-3198, LA-UR-21-20953",
+    month = "3",
+    year = "2021"
+}
+
+@article{Bedaque:2021bja,
+    author = "Bedaque, Paulo and others",
+    title = "{A.I. for nuclear physics}",
+    doi = "10.1140/epja/s10050-020-00290-x",
+    journal = "Eur. Phys. J. A",
+    volume = "57",
+    number = "3",
+    pages = "100",
+    year = "2021"
 }
 
 @ARTICLE{Binnig1986-ig,
@@ -1788,13 +1799,18 @@ publisher = {Morgan-Kaufmann},
 url = {http://papers.nips.cc/paper/250-optimal-brain-damage}
 }
 
-@unpublished{qkeraspaper,
-      title={Automatic deep heterogeneous quantization of Deep Neural Networks for ultra low-area, low-latency inference on the edge at particle colliders}, 
-      author={Claudionor N. Coelho Jr. au2 and Aki Kuusela and Shan Li and Hao Zhuang and Thea Aarrestad and Vladimir Loncar and Jennifer Ngadiuba and Maurizio Pierini and Adrian Alan Pol and Sioni Summers},
-      year={2020},
+@article{qkeraspaper,
       eprint={2006.10159},
       archivePrefix={arXiv},
-      primaryClass={physics.ins-det}
+      primaryClass={physics.ins-det},
+	author = {Coelho, Claudionor N. and Kuusela, Aki and Li, Shan and Zhuang, Hao and Ngadiuba, Jennifer and Aarrestad, Thea Klaeboe and Loncar, Vladimir and Pierini, Maurizio and Pol, Adrian Alan and Summers, Sioni},
+	journal = {Nat. Mach. Intell.},
+	number = {8},
+	pages = {675},
+	title = {Automatic heterogeneous quantization of deep neural networks for low-latency inference on the edge for particle detectors},
+	volume = {3},
+	year = {2021},
+	doi = {10.1038/s42256-021-00356-5}
 }
 
 @inproceedings{han2016deep,
@@ -3755,18 +3771,6 @@ lastaccessed = "June 17, 2018",
 }
 
 
-
-@InProceedings{7577380,
-  author    = {N. {Kapre} and S. {Bayliss}},
-  title     = {Survey of domain-specific languages for FPGA computing},
-  booktitle = {2016 26th International Conference on Field Programmable Logic and Applications (FPL)},
-  year      = {2016},
-  pages     = {1-12},
-  doi       = {10.1109/FPL.2016.7577380},
-}
-
-
-
 @article{rfu,
 author = {Todman, T.J. and Constantinides, G.A. and Wilton, S.J.E. and Mencer, O. and Luk, W. and Cheung, P.Y.K.},
 year = {2005},
@@ -3834,6 +3838,7 @@ journal = {ACM Trans. Reconfigurable Technol. Syst.},
 
 
 
+
 @inproceedings{connectal,
 author = {King, Myron and Hicks, Jamey and Ankcorn, John},
 title = {Software-Driven Hardware Development},
@@ -3847,17 +3852,318 @@ series = {FPGA '15}
 
 
 
-@article{intelopae,
-author = {Enno Luebbers, Song Liu, Michael Chu},
-title = {White Paper: Simplify Software Integration for
-FPGA Accelerators with OPAE}
+@INPROCEEDINGS{dsl,
+  author={Kapre, Nachiket and Bayliss, Samuel},
+  booktitle={2016 26th International Conference on Field Programmable Logic and Applications (FPL)}, 
+  title={Survey of domain-specific languages for FPGA computing}, 
+  year={2016},
+  pages={1-12},
+  doi={10.1109/FPL.2016.7577380}}
 }
+
+
+@article{p4lang,
+author = {Bosshart, Pat and Daly, Dan and Gibb, Glen and Izzard, Martin and McKeown, Nick and Rexford, Jennifer and Schlesinger, Cole and Talayco, Dan and Vahdat, Amin and Varghese, George and Walker, David},
+title = {P4: Programming Protocol-Independent Packet Processors},
+year = {2014},
+publisher = {Association for Computing Machinery},
+journal = {SIGCOMM Comput. Commun. Rev.},
+
+}
+
+@INPROCEEDINGS{SPIRAL,
+  author={Nordin, G. and Milder, P.A. and Hoe, J.C. and Puschel, M.},
+  booktitle={Proceedings. 42nd Design Automation Conference, 2005.}, 
+  title={Automatic generation of customized discrete Fourier transform IPs}, 
+  year={2005},
+  pages={471-474},
+  doi={10.1145/1065579.1065703}}
+  
+  
+  @INPROCEEDINGS{VSIPL,
+  author={Janka, R. and Judd, R. and Lebak, J. and Richards, M. and Campbell, D.},
+  booktitle={2001 IEEE International Conference on Acoustics, Speech, and Signal Processing. Proceedings (Cat. No.01CH37221)}, 
+  title={VSIPL: an object-based open standard API for vector, signal, and image processing}, 
+  year={2001},
+  volume={2},
+  number={},
+  pages={949-952 vol.2},
+  doi={10.1109/ICASSP.2001.941073}}
+
+
+@article{click,
+author = {Kohler, Eddie and Morris, Robert and Chen, Benjie and Jannotti, John and Kaashoek, M. Frans},
+title = {The Click Modular Router},
+year = {2000},
+issue_date = {Aug. 2000},
+publisher = {Association for Computing Machinery},
+journal = {ACM Trans. Comput. Syst.},
+}
+
+@inproceedings{glacier,
+author = {Mueller, Rene and Teubner, Jens and Alonso, Gustavo},
+title = {Glacier: A Query-to-Hardware Compiler},
+year = {2010},
+publisher = {Association for Computing Machinery},
+series = {SIGMOD '10}
+}
+
+@inproceedings{optiML,
+author = {Sujeeth, Arvind K. and Lee, HyoukJoong and Brown, Kevin J. and Chafi, Hassan and Wu, Michael and Atreya, Anand R. and Olukotun, Kunle and Rompf, Tiark and Odersky, Martin},
+title = {OptiML: An Implicitly Parallel Domain-Specific Language for Machine Learning},
+year = {2011},
+booktitle = {Proceedings of the 28th International Conference on International Conference on Machine Learning},
+}
+
+@INPROCEEDINGS{verilogAMS,
+  author={Kapre, Nachiket and DeHon, André},
+  booktitle={2009 17th IEEE Symposium on Field Programmable Custom Computing Machines}, 
+  title={Accelerating SPICE Model-Evaluation using FPGAs}, 
+  year={2009}, 
+  }
+@article{maxeler,
+author = {Pell, Oliver and Mencer, Oskar},
+title = {Surviving the End of Frequency Scaling with Reconfigurable Dataflow Computing},
+year = {2011},
+publisher = {Association for Computing Machinery},
+journal = {SIGARCH Comput. Archit. News},
+}
+
+
+@INPROCEEDINGS{score,
+  author={Kapre, Nachiket and DeHon, André},
+  booktitle={2011 International Conference on Field-Programmable Technology}, 
+  title={VLIW-SCORE: Beyond C for sequential control of SPICE FPGA acceleration}, 
+  year={2011},
+  volume={},
+  number={},
+  pages={1-9},
+  doi={10.1109/FPT.2011.6132678}}
+
+@article{lime,
+author = {Bacon, David and Rabbah, Rodric and Shukla, Sunil},
+title = {FPGA Programming for the Masses: The Programmability of FPGAs Must Improve If They Are to Be Part of Mainstream Computing.},
+year = {2013},
+publisher = {Association for Computing Machinery},
+journal = {Queue},
+}
+
+@article{openDF,
+author = {Bhattacharyya, Shuvra S. and Brebner, Gordon and Janneck, J\"{o}rn W. and Eker, Johan and von Platen, Carl and Mattavelli, Marco and Raulet, Micka\"{e}l},
+title = {OpenDF: A Dataflow Toolset for Reconfigurable Hardware and Multicore Systems},
+year = {2009},
+issue_date = {December 2008},
+publisher = {Association for Computing Machinery},
+journal = {SIGARCH Comput. Archit. News},
+}
+
+@article{graphstep,
+author = {Delorimier, Michael and Kapre, Nachiket and Mehta, Nikil and Dehon, Andr\'{e}},
+title = {Spatial Hardware Implementation for Sparse Graph Algorithms in GraphStep},
+year = {2011},
+publisher = {Association for Computing Machinery},
+journal = {ACM Trans. Auton. Adapt. Syst.},
+}
+
+@INPROCEEDINGS{graphgen,
+  author={Nurvitadhi, Eriko and Weisz, Gabriel and Wang, Yu and Hurkat, Skand and Nguyen, Marie and Hoe, James C. and Martínez, José F. and Guestrin, Carlos},
+  booktitle={2014 IEEE 22nd Annual International Symposium on Field-Programmable Custom Computing Machines}, 
+  title={GraphGen: An FPGA Framework for Vertex-Centric Graph Computation}, 
+  year={2014},
+ }
+
+@INPROCEEDINGS{accelerator,
+  author={Bond, Barry and Hammil, Kerry and Litchev, Lubomir and Singh, Satnam},
+  booktitle={2010 18th IEEE Annual International Symposium on Field-Programmable Custom Computing Machines}, 
+  title={FPGA Circuit Synthesis of Accelerator Data-Parallel Programs}, 
+  year={2010},
+  }
+  
+  
+  @INPROCEEDINGS{fcuda,
+  author={Papakonstantinou, Alexandros and Gururaj, Karthik and Stratton, John A. and Chen, Deming and Cong, Jason and Hwu, Wen-Mei W.},
+  booktitle={2009 IEEE 7th Symposium on Application Specific Processors}, 
+  title={FCUDA: Enabling efficient compilation of CUDA kernels onto FPGAs}, 
+  year={2009},
+  }
+  
+  @inproceedings{aetherling,
+author = {Durst, David and Feldman, Matthew and Huff, Dillon and Akeley, David and Daly, Ross and Bernstein, Gilbert Louis and Patrignani, Marco and Fatahalian, Kayvon and Hanrahan, Pat},
+title = {Type-Directed Scheduling of Streaming Accelerators},
+year = {2020},
+publisher = {Association for Computing Machinery},
+series = {PLDI 2020}
+}
+  
+  
+@INPROCEEDINGS{susy,
+  author={Lai, Yi-Hsiang and Rong, Hongbo and Zheng, Size and Zhang, Weihao and Cui, Xiuping and Jia, Yunshan and Wang, Jie and Sullivan, Brendan and Zhang, Zhiru and Liang, Yun and Zhang, Youhui and Cong, Jason and George, Nithin and Alvarez, Jose and Hughes, Christopher and Dubey, Pradeep},
+  booktitle={2020 IEEE/ACM International Conference On Computer Aided Design (ICCAD)}, 
+  title={SuSy: A Programming Model for Productive Construction of High-Performance Systolic Arrays on FPGAs}, 
+  year={2020},
+  }  
+  
+  
+  @INPROCEEDINGS{flopoco,
+  author={de Dinechin, Florent and Klein, Cristian and Pasca, Bogdan},
+  booktitle={2009 International Conference on Field Programmable Logic and Applications}, 
+  title={Generating high-performance custom floating-point pipelines}, 
+  year={2009},
+}
+  
+  
+@INPROCEEDINGS{jhdl,
+  author={Bellows, P. and Hutchings, B.},
+  booktitle={Proceedings. IEEE Symposium on FPGAs for Custom Computing Machines (Cat. No.98TB100251)}, 
+  title={JHDL-an HDL for reconfigurable systems}, 
+  year={1998},
+}
+
+@INPROCEEDINGS{pmdc,
+  author={Bertin, P. and Touati, H.},
+  booktitle={Proceedings of IEEE Workshop on FPGA's for Custom Computing Machines}, 
+  title={PAM programming environments: practice and experience}, 
+  year={1994},
+}
+  
+  
+@INPROCEEDINGS{hipacc,
+  author={Reiche, Oliver and Özkan, M. Akif and Membarth, Richard and Teich, Jürgen and Hannig, Frank},
+  booktitle={2017 IEEE/ACM International Conference on Computer-Aided Design (ICCAD)}, 
+  title={Generating FPGA-based image processing accelerators with Hipacc: (Invited paper)}, 
+  year={2017},
+}  
+
+
+@INPROCEEDINGS{frost,
+  author={Del Sozzo, Emanuele and Baghdadi, Riyadh and Amarasinghe, Saman and Santambrogio, Marco D.},
+  booktitle={2017 IEEE International Conference on Computer Design (ICCD)}, 
+  title={A Common Backend for Hardware Acceleration on FPGA}, 
+  year={2017},
+ }
+
+@article{darkroom,
+author = {Hegarty, James and Brunhaver, John and DeVito, Zachary and Ragan-Kelley, Jonathan and Cohen, Noy and Bell, Steven and Vasilyev, Artem and Horowitz, Mark and Hanrahan, Pat},
+title = {Darkroom: Compiling High-Level Image Processing Code into Hardware Pipelines},
+year = {2014},
+publisher = {Association for Computing Machinery},
+journal = {ACM Trans. Graph.},
+}
+
+@article{ripl,
+author = {Stewart, Robert and Duncan, Kirsty and Michaelson, Greg and Garcia, Paulo and Bhowmik, Deepayan and Wallace, Andrew},
+title = {RIPL: A Parallel Image Processing Language for FPGAs},
+year = {2018},
+publisher = {Association for Computing Machinery},
+}
+
+@INPROCEEDINGS{polymage,
+  author={Chugh, Nitin and Vasista, Vinay and Purini, Suresh and Bondhugula, Uday},
+  booktitle={2016 International Conference on Parallel Architecture and Compilation Techniques (PACT)}, 
+  title={A DSL compiler for accelerating image processing pipelines on FPGAs}, 
+  year={2016},
+}
+
+@article{jbits,
+author = {Guccione, Steve and Levi, Delon and Sundararajan, Prasanna},
+year = {2000},
+title = {JBits: Java based interface for reconfigurable computing}
+}
+
+
+  
+@INPROCEEDINGS{tapas,
+  author={Chi, Yuze and Guo, Licheng and Lau, Jason and Choi, Young-kyu and Wang, Jie and Cong, Jason},
+  booktitle={2021 IEEE 29th Annual International Symposium on Field-Programmable Custom Computing Machines (FCCM)}, 
+  title={Extending High-Level Synthesis for Task-Parallel Programs}, 
+  year={2021},
+}  
+  
+@INPROCEEDINGS{caldeira,
+  author={Caldeira, Pedro and Penha, Jeronimo C. and Bragança, Lucas and Ferreira, Ricardo and Nacif, José Augusto M. and Ferreira, Renato and Pereira, Fernando M. Q.},
+  booktitle={2018 30th International Symposium on Computer Architecture and High Performance Computing (SBAC-PAD)}, 
+  title={From Java to FPGA: An Experience with the Intel HARP System}, 
+  year={2018},
+}
+ 
+@inproceedings{linqits,
+author = {Chung, Eric S. and Davis, John D. and Lee, Jaewon},
+title = {LINQits: Big Data on Little Clients},
+year = {2013},
+publisher = {Association for Computing Machinery},
+booktitle = {Proceedings of the 40th Annual International Symposium on Computer Architecture},
+
+}  
+  
+ @INPROCEEDINGS{dhdl,
+  author={Koeplinger, David and Prabhakar, Raghu and Zhang, Yaqi and Delimitrou, Christina and Kozyrakis, Christos and Olukotun, Kunle},
+  booktitle={2016 ACM/IEEE 43rd Annual International Symposium on Computer Architecture (ISCA)}, 
+  title={Automatic Generation of Efficient Accelerators for Reconfigurable Hardware}, 
+  year={2016},
+  }
+  
+ @article{spatial,
+author = {Koeplinger, David and Feldman, Matthew and Prabhakar, Raghu and Zhang, Yaqi and Hadjis, Stefan and Fiszel, Ruben and Zhao, Tian and Nardi, Luigi and Pedram, Ardavan and Kozyrakis, Christos and Olukotun, Kunle},
+title = {Spatial: A Language and Compiler for Application Accelerators},
+year = {2018},
+publisher = {Association for Computing Machinery},
+journal = {SIGPLAN Not.},
+} 
+  
+  
+  
+@inproceedings{dahlia,
+author = {Nigam, Rachit and Thomas, Samuel and Li, Zhijing and Sampson, Adrian},
+title = {A Compiler Infrastructure for Accelerator Generators},
+year = {2021},
+publisher = {Association for Computing Machinery},
+booktitle = {Proceedings of the 26th ACM International Conference on Architectural Support for Programming Languages and Operating Systems},
+series = {ASPLOS 2021}
+}
+  
+  
+  
+@article{kami
+author = {Choi, Joonwon and Vijayaraghavan, Muralidaran and Sherman, Benjamin and Chlipala, Adam and Arvind},
+title = {Kami: A Platform for High-Level Parametric Hardware Specification and Its Modular Verification},
+year = {2017},
+publisher = {Association for Computing Machinery},
+journal = {Proc. ACM Program. Lang.},
+}
+  
+
+@inproceedings{cascade,
+author = {Schkufza, Eric and Wei, Michael and Rossbach, Christopher J.},
+title = {Just-In-Time Compilation for Verilog: A New Technique for Improving the FPGA Programming Experience},
+year = {2019},
+publisher = {Association for Computing Machinery},
+booktitle = {Proceedings of the Twenty-Fourth International Conference on Architectural Support for Programming Languages and Operating Systems},
+}
+
+
+@inproceedings{floem,
+author = {Phothilimthana, Phitchaya Mangpo and Liu, Ming and Kaufmann, Antoine and Peter, Simon and Bodik, Rastislav and Anderson, Thomas},
+title = {Floem: A Programming System for NIC-Accelerated Network Applications},
+year = {2018},
+publisher = {USENIX Association},
+booktitle = {Proceedings of the 13th USENIX Conference on Operating Systems Design and Implementation},
+}
+
+  
+  
+  
+  
+%@article{intelopae,
+%author = {Enno Luebbers, Song Liu, Michael Chu},
+%title = {White Paper: Simplify Software Integration for
+%FPGA Accelerators with OPAE}
+%}
 
 @misc{XRT,
   author = {Xilinx},
   title = {Xilinx Runtime (XRT) Architecture},
   howpublished = {\url{https://xilinx.github.io/XRT/2020.2/html/index.html}},
-  note = {(Last accessed: 2020-02-16)}
+  note = {(Last accessed: 2021-02-16)}
 }
 
 @misc{vitis,
@@ -3980,6 +4286,7 @@ booktitle={In: Proceedings of the 15th ACM SIGPLAN/SIGOPS
 International Conference on Virtual Execution Environments. VEE. 2019. doi: 10.1145/3313808.3313819},
 title = {Dynamic Application Reconfiguration on Heterogeneous Hardware}
 }
+
 
 
 
@@ -6267,13 +6574,19 @@ author       = {Xiaozheng Xie and Jianwei Niu and Xuefeng Liu and Zhengsu Chen a
     primaryClass={stat.ML},
     booktitle = {6th International Conference on Learning Representations ({ICLR}) 2018, Workshop Track Proceedings},
 }
-@misc{aarrestad2021fast,
-      title={Fast convolutional neural networks on FPGAs with hls4ml}, 
-      author={Thea Aarrestad and Vladimir Loncar and Maurizio Pierini and Sioni Summers and Jennifer Ngadiuba and Christoffer Petersson and Hampus Linander and Yutaro Iiyama and Giuseppe Di Guglielmo and Javier Duarte and Philip Harris and Dylan Rankin and Sergo Jindariani and Kevin Pedro and Nhan Tran and Mia Liu and Edward Kreinar and Zhenbin Wu and Duc Hoang},
-      year={2021},
-      eprint={2101.05108},
-      archivePrefix={arXiv},
-      primaryClass={cs.LG}
+@article{aarrestad2021fast,
+    author = {Thea Aarrestad and Vladimir Loncar and Nicol{\`{o}} Ghielmetti and Maurizio Pierini and Sioni Summers and Jennifer Ngadiuba and Christoffer Petersson and Hampus Linander and Yutaro Iiyama and Giuseppe Di Guglielmo and Javier Duarte and Philip Harris and Dylan Rankin and Sergo Jindariani and Kevin Pedro and Nhan Tran and Mia Liu and Edward Kreinar and Zhenbin Wu and Duc Hoang},
+    title = "{Fast convolutional neural networks on FPGAs with hls4ml}",
+    eprint = "2101.05108",
+    archivePrefix = "arXiv",
+    primaryClass = "cs.LG",
+    reportNumber = "FERMILAB-PUB-21-130-SCD",
+    doi = "10.1088/2632-2153/ac0ea1",
+    journal = "Mach. Learn. Sci. Tech.",
+    volume = "2",
+    number = "4",
+    pages = "045015",
+    year = "2021"
 }
 
 @article{vaemining,
@@ -7561,3 +7874,47 @@ eprint = {
   journal={arXiv preprint arXiv:2106.14089},
   year={2021}
 }
+
+@inproceedings{skillman2020technical,
+  title={A Technical Overview of Cortex-M55 and Ethos-U55: Arm’s Most Capable Processors for Endpoint AI},
+  author={Skillman, Allan and Edso, Tomas},
+  booktitle={2020 IEEE Hot Chips 32 Symposium (HCS)},
+  pages={1--20},
+  year={2020},
+  organization={IEEE Computer Society}
+}
+
+
+@misc{onnx_github,
+    author = {Bai, Junjie and Lu, Fang and Zhang, Ke and others},
+    title = {ONNX: Open Neural Network Exchange},
+    year = {2019},
+    publisher = {GitHub},
+    journal = {GitHub repository},
+    howpublished = {\url{https://github.com/onnx/onnx}},
+    commit = {94d238d96e3fb3a7ba34f03c284b9ad3516163be}
+}
+
+@article{DBLP:journals/corr/abs-1709-04060,
+  author    = {Yaman Umuroglu and
+               Magnus Jahre},
+  title     = {Streamlined Deployment for Quantized Neural Networks},
+  journal   = {CoRR},
+  volume    = {abs/1709.04060},
+  year      = {2017},
+  url       = {http://arxiv.org/abs/1709.04060},
+  archivePrefix = {arXiv},
+  eprint    = {1709.04060},
+  timestamp = {Mon, 13 Aug 2018 16:48:02 +0200},
+  biburl    = {https://dblp.org/rec/journals/corr/abs-1709-04060.bib},
+  bibsource = {dblp computer science bibliography, https://dblp.org}
+}
+
+@inproceedings{kathail2020xilinx,
+  title={Xilinx Vitis unified software platform},
+  author={Kathail, Vinod},
+  booktitle={Proceedings of the 2020 ACM/SIGDA International Symposium on Field-Programmable Gate Arrays},
+  pages={173--174},
+  year={2020}
+}
+

@@ -34,7 +34,7 @@
 \renewcommand{\vec}[1]{\boldsymbol{#1}}
 \newcommand{\TODO}[1]{\textcolor{red}{[TODO: #1]}}
 
-\def\keyFont{\fontsize{8}{11}\helveticabold }
+% \def\keyFont{\fontsize{8}{11}\helveticabold }
 \begin{document}
 
 \title[Fast Machine Learning in Science]{Applications and Techniques for Fast Machine Learning in Science}
@@ -46,14 +46,19 @@
 \address{} %This field will be automatically populated
 \correspondance{} %This field will be automatically populated
 
-\extraAuth{}% If there are more than 1 corresponding author, comment this line and uncomment the next one.
+% \extraAuth{}% If there are more than 1 corresponding author, comment this line and uncomment the next one.
+% \extraAuth{corresponding Author2 \\ Laboratory X2, Institute X2, Department X2, Organization X2, Street X2, City X2 , State XX2 (only USA, Canada and Australia), Zip Code2, X2 Country X2, email2@uni2.edu}
 
 \maketitle
 
 
+\clearpage
 \begin{abstract}
 \section{}
-Abstract
+In this community review report, we discuss applications and techniques for \textit{fast} machine learning (ML) in science---the concept of integrating power ML methods into the real-time experimental data processing loop to accelerate scientific discovery. 
+The material for the report builds on two workshops held by the Fast ML for Science community and covers three main areas: applications for fast ML across a number of scientific domains; techniques for training and implementing performant and resource-efficient ML algorithms; and computing architectures, platforms and technologies for deploying these algorithms.  
+We also present overlapping challenges across the multiple scientific domains where common solutions can be found.  This community report is intended to give plenty of examples and inspiration for scientific discovery through integrated and accelerated ML solutions.  
+This is followed by a high level overview and organization of technical advances, including an abundance of pointers to source material, which can enable these breakthroughs.  
 \tiny
  \keyFont{ \section{Keywords:} fast machine learning} 
 \end{abstract}
@@ -85,7 +90,7 @@ Abstract
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \pagebreak
-\section{Examplars of domain applications}
+\section{Exemplars of domain applications}
 \label{sec:apps}
 %\textcolor{red}{Section Editors: ...}
 \input{_s2_applications}
@@ -105,8 +110,16 @@ Abstract
 \label{sec:technolog_sota}
 \input{_s4_technology}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\pagebreak
+% \addtocontents{toc}{\setcounter{tocdepth}{5}}
+\section{Outlook}
+\label{sec:outlook}
+\input{_s5_outlook}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\pagebreak
 \section*{Acknowledgments}
 We acknowledge the Fast Machine Learning collective as an open community of multi-domain experts and collaborators. 
 This community was important for the development of this project. 

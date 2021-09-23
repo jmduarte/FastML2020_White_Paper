@@ -50,13 +50,17 @@ Processor design, and the design of algorithms around processors,  often referre
 For example, in some cases, ultra-low latency inference times are needed to perform scientific measurements. 
 One must efficiently design the algorithm to optimally utilize the hardware constraints available while preserving the algorithm performance within desired experimental requirements. This is the essence of hardware AI co-design.
 
-The contents of this review are laid out as follows.  In the Section~\ref{sec:apps}, we will explore a broad range of scientific problems where Fast ML can act as a disruptive technology to the status quo and lead to a significant change in how we process data.  
-Domain experts from seemingly different domains are examined.  In Section~\ref{sec:overlaps}, we describe  data representations and experimental platform choices are common to many types of experiments.  
-We will connect how Fast ML solutions can be generalized to low latency, highly resource efficient, and domain-specific deep learning inference for many scientific applications. Finally in Section~\ref{sec:technolog_sota}, to achieve this requires optimized hardware-ML co-design from the algorithm design to the system architecture.  
+The contents of this review are laid out as follows.  
+In the Section~\ref{sec:apps}, we will explore a broad range of scientific problems where Fast ML can act as a disruptive technology to the status quo and lead to a significant change in how we process data.  
+Domain experts from seemingly different domains are examined.  
+In Section~\ref{sec:overlaps}, we describe  data representations and experimental platform choices are common to many types of experiments.  
+We will connect how Fast ML solutions can be generalized to low latency, highly resource efficient, and domain-specific deep learning inference for many scientific applications. 
+Finally in Section~\ref{sec:technolog_sota}, to achieve this requires optimized hardware-ML co-design from the algorithm design to the system architecture.  
 We provide an overview of state-of-the-art techniques to train neural networks optimized for both performance and speed, survey various compute architectures to meet the needs of the experimental design, and outline software solutions which optimize and enable the hardware deployment.    
 
 The goal of this paper is to bring together scientific opportunities, common solutions,
-and state-of-the-art technology into one single narrative. We hope this can contribute to accelerate the deployment of potentially transformative ML solutions to a broad range of scientific fields going forward. 
+and state-of-the-art technology into one single narrative. 
+We hope this can contribute to accelerate the deployment of potentially transformative ML solutions to a broad range of scientific fields going forward. 
 
 
 % In this document, we will focus on developments of scientific applications where "Fast Machine Learning" is required. "Fast Machine Learning" constitutes broadly the region where AI algorithms are needed to run at low latency. Low latency processes are processes that require fast reaction times so that specific scientific processes can be observed or systems can be controlled in real time. Low latency AI differs from other AI developments in that there is an explicit focus on attaining AI inference with the smallest possible latency. This work differs from AI design of high throughput systems where the aim is to perform as many as possible  operations over a longer period of time so that the throughput aggregated over time is as large as possible. 
